@@ -1,0 +1,41 @@
+#container__form_registro{
+
+    margin-top: 5vw;
+    margin-left: 25vw;
+    margin-right: 25vw;
+}
+
+#h1__registro{
+
+    margin-top: 2%;
+    margin-bottom: 4%;
+}
+
+#h2__registro{
+
+    margin-top: 2%;
+    margin-bottom: 4%;
+}
+
+#a_ingresar{
+    text-decoration: none !important; 
+}
+#a_ingresar:hover{
+    color:white !important; 
+}
+
+#container__botones{
+
+    position:fixed;
+    bottom: 0;
+    margin-bottom: 5vh;
+    right: auto;
+    left: auto;
+}
+
+#div_home{
+
+    margin-top: 5vh !important;
+}
+
+
