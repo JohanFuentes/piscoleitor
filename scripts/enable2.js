@@ -6,10 +6,10 @@ $(document).ready(function() {
 		document.getElementById("no").style.display="block";
                 }); 
                 
-        $("#no").click(function(){ 
+        /* $("#no").click(function(){ 
                 $("#input1").prop("disabled", true); 
 		$("#input2").prop("disabled", true);  
 		document.getElementById("no").style.display="none";
                 }); 
-
+*/
 }); 

@@ -1,3 +1,11 @@
+<?php
+
+session_start();
+
+if(isset($_SESSION["user"])){
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,15 +15,13 @@
     <link rel="stylesheet" href="main.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="../../scripts/showinputs.js"></script>
     <title>Document</title>
 </head>
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="../../home.html">Piscoleitor</a>
+          <a class="navbar-brand" href="../home.php">Piscoleitor</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -27,7 +33,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <div class="container">
-                        <a class="navbar-brand" href="homefiesta.html">
+                        <a class="navbar-brand" href="../home.php">
                           Home <img src="https://image000.flaticon.com/png/512/1297/1297859.png" alt="" width="30" height="24">
                         </a>
                       </div>
@@ -35,7 +41,7 @@
 
                 <li class="nav-item">
                     <div class="container">
-                        <a class="navbar-brand" href="../../mas.html">
+                        <a class="navbar-brand" href="../mas.php">
                           Ingresar o crear fiesta <img src="https://image000.flaticon.com/png/512/1665/1665731.png" alt="" width="30" height="24">
                         </a>
                       </div>
@@ -48,10 +54,10 @@
                   </a>
                 
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="../../usuario/misdatos.html">Mis datos</a></li>
-                    <li><a class="dropdown-item" href="../../usuario/miscodigos.html">Mis codigos</a></li>
+                    <li><a class="dropdown-item" href="../usuario/misdatos.php">Mis datos</a></li>
+                    <li><a class="dropdown-item" href="../usuario/miscodigos.php">Mis codigos</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="../../index.html">Sing out</a></li>
+                    <li><a class="dropdown-item" href="../funcionesphp/singout.php">Sing out</a></li>
                     <li><a class="dropdown-item" style="display:none;" href="#">Salir de la fiesta</a></li>
                     <li><a class="dropdown-item" style="display:none;" href="#">Terminar la fiesta</a></li>
                   </ul>
@@ -64,64 +70,38 @@
 </header>    
 
 <div id="div_home">
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <center><h1 class="display-4">Nombre de la fiesta</h1></center>
-        <center>
+        <center><h1 class="display-4">Lista de fiestas</h1></center>
 
-          <div id="nombre" class="row mb-3" style="margin: 5%;">
-                <center><label for="exampleFormControlInput1" class="form-label">Porcentaje pisco</label></center>
-                
-                <center><div class="col-sm-10 contain__inputs">
+<div style="margin:3%;">
+	<div class="btn-group">
+  <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Mis Fiestas
+  </button>
+  <ul class="dropdown-menu">
+	  <li><a class="dropdown-item" href="#">#1</a></li>
+	  <li><a class="dropdown-item" href="#">#2</a></li>
+	  <li><a class="dropdown-item" href="#">#2</a></li>
+	  <li><a class="dropdown-item" href="#">...</a></li>
 
-                  <label style="font-size: 40px;" id="valuno" for="uno" >50%</label>
-                  <input id="uno" type="range" min="0" max="100" value="50" step="10">
-                  
-                </div></center>
-                
-          </div>
-
-
-          <div id="nombre" class="row mb-3" style="margin: 5%;">
-            <center><label for="exampleFormControlInput1" class="form-label">Porcentaje coca cola</label></center>
-            
-            <center><div class="col-sm-10 contain__inputs">
-
-              <label style="font-size: 40px;" id="valdos" for="dos" >50%</label>
-              <input id="dos" type="range" min="0" max="100" value="50" step="10">
-
-            </div></center>
-            
-          </div>
-
-       
-          <div id="limite" class="row mb-3" style="display: none; margin: 5%;">
-            <center><label for="exampleFormControlInput1" class="form-label">Ingresar limite de vasos</label></center>
-            
-            <center><div class="col-sm-10 contain__inputs">
-              <input style="width: min-content;" type="number" class="form-control inputs__form" id="codigo">
-            </div></center>
-            
-            </div>
-    
-    
-            <center><div class="containerCheck" style="margin: 2%;">
-              <input type="checkbox" name="check" id="check" value="1" onchange="javascript:showContent('limite','check')" />
-              <b>Ingresar limite de vasos</b>
-            </div></center>
-
-<center><a style="text-decoration: none;" href="#"><button style="display: block; margin: 5%; " type="button" class="btn btn-primary btn-lg botones_home">Guardar datos</button></a></center>
-
-
-            <a style="text-decoration: none;" href="configuracionfiesta.html"><button style="display: block; margin: 5%; " type="button" class="btn btn-primary btn-lg botones_home">Configuracion de la fiesta</button></a>
-
-        </center>
-      </div>
-    </div>
+  </ul>
+</div>
 </div>
 
-    <script src="../../scripts/ranges.js"></script>
+
+</div>
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
 </body>
 </html>
+
+<?php
+
+}else{
+
+        header("Location:../index.php");
+
+}
+
+?>
+

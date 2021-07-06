@@ -1,3 +1,13 @@
+<?php 
+session_start();
+
+if(isset($_SESSION["user"]) || isset($_SESSION["fiesta"])){
+
+	header("location:home.php");
+
+}else{
+
+?>
 
 <!html>
 <html lang="en">
@@ -24,10 +34,10 @@
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
             </ul>
 
-            <form class="d-flex ">
-              <input class="form-control me-2" id="floatingInput" type="search" placeholder="Correo" aria-label="Search">
-              <input class="form-control me-2" type="search" placeholder="Contraseña" aria-label="Search">
-              <button class="btn btn-outline-primary" id="b_ingresar" type="submit"><a id="a_ingresar" href="home.html">Ingresar</a></button>
+            <form class="d-flex " action="funcionesphp/login.php" method="POST">
+              <input class="form-control me-2" name="correo" id="floatingInput" type="email" placeholder="Correo" aria-label="Search">
+              <input class="form-control me-2" name="clave" type="password" placeholder="Contraseña" aria-label="Search">
+              <button class="btn btn-outline-primary" id="b_ingresar" type="submit">Ingresar</button>
             </form>
           </div>
         </div>
@@ -39,18 +49,18 @@
     <h1 id="h1__registro">¿No tienes cuenta?</h1>
     <h2 id="h2__registro">Registrate!</h2>
 
-<form>
+<form action="funcionesphp/registro.php" method="POST">
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Nombre</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <input type="text" class="form-control" name="nombre" id="exampleInputEmail1" aria-describedby="emailHelp">
       </div>
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Correo</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <input type="email" class="form-control" name="correo" id="exampleInputEmail1" aria-describedby="emailHelp">
     </div>
     <div class="mb-3">
       <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-      <input type="password" class="form-control" id="exampleInputPassword1">
+      <input type="password" class="form-control" name="clave" id="exampleInputPassword1">
     </div>
 
     <button type="submit" class="btn btn-primary">Registrarse</button>
@@ -61,3 +71,4 @@
 </body>
 </html>
 
+<?php } ?>

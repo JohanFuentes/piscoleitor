@@ -1,3 +1,20 @@
+<?php
+
+session_start();
+
+if(isset($_SESSION["user"])){
+
+?>
+
+<style>
+
+#codigo::placeholder{
+    text-align: center;
+}
+
+</style>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,13 +24,15 @@
     <link rel="stylesheet" href="main.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="../scripts/showinputs.js"></script>
     <title>Document</title>
 </head>
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="../home.html">Piscoleitor</a>
+          <a class="navbar-brand" href="../home.php">Piscoleitor</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -25,7 +44,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <div class="container">
-                        <a class="navbar-brand" href="../home.html">
+                        <a class="navbar-brand" href="../home.php">
                           Home <img src="https://image000.flaticon.com/png/512/1297/1297859.png" alt="" width="30" height="24">
                         </a>
                       </div>
@@ -33,7 +52,7 @@
 
                 <li class="nav-item">
                     <div class="container">
-                        <a class="navbar-brand" href="../mas.html">
+                        <a class="navbar-brand" href="../mas.php">
                           Ingresar o crear fiesta <img src="https://image000.flaticon.com/png/512/1665/1665731.png" alt="" width="30" height="24">
                         </a>
                       </div>
@@ -46,10 +65,10 @@
                   </a>
                 
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="../usuario/misdatos.html">Mis datos</a></li>
-                    <li><a class="dropdown-item" href="../usuario/miscodigos.html">Mis codigos</a></li>
+                    <li><a class="dropdown-item" href="../usuario/misdatos.php">Mis datos</a></li>
+                    <li><a class="dropdown-item" href="../usuario/miscodigos.php">Mis codigos</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="../index.html">Sing out</a></li>
+                    <li><a class="dropdown-item" href="../funcionesphp/singout.php">Sing out</a></li>
                     <li><a class="dropdown-item" style="display:none;" href="#">Salir de la fiesta</a></li>
                     <li><a class="dropdown-item" style="display:none;" href="#">Terminar la fiesta</a></li>
                   </ul>
@@ -61,28 +80,51 @@
       </nav>
 </header>    
 
-<div id="div_home">
-        <center><h1 class="display-4">Lista de fiestas</h1></center>
+<div style="margin-top: 10vh; margin-left: 25vw; margin-right: 25vw;" id="div_ingresarFiesta">
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        
+    <center><h1 style="margin-bottom: 15vh;">Ingresar a fiesta<h1></center>
 
-<div style="margin:3%;">
-	<div class="btn-group">
-  <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Mis Fiestas
-  </button>
-  <ul class="dropdown-menu">
-	  <li><a class="dropdown-item" href="#">#1</a></li>
-	  <li><a class="dropdown-item" href="#">#2</a></li>
-	  <li><a class="dropdown-item" href="#">#2</a></li>
-	  <li><a class="dropdown-item" href="#">...</a></li>
-
-  </ul>
+        <center>
+        </div>
+    </div>
 </div>
 </div>
 
+<div style="margin-left: 10vw; margin-right: 10vw;">
+<div class="form__inputs2" id="formulario">
+<form id="formAjax" action="../funcionesphp/ingresarfiesta.php" method="POST">
+<div class="row mb-3">
+<center><label for="exampleFormControlInput1" class="form-label">Codigo de fiesta</label></center>
 
+<center><div class="col-sm-10 contain__inputs">
+  <input type="text" class="form-control inputs__form" name="id" id="codigo">
+</div></center>
+
+</div>
+
+<center><button style="display: block; margin: 5%; " type="submit" class="btn btn-primary btn-lg botones_home">Ingresar a fiesta</button></center>
+<center><strong id="error" style="color:red;" class="blink_me"></strong></center>
+</form>
+</div>
+</div>
+        </center>
+      </div>
+    </div>
 </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
 </body>
 </html>
+
+<?php
+
+}else{
+
+        header("Location:../index.php");
+
+}
+
+?>

@@ -1,3 +1,10 @@
+<?php
+
+date_default_timezone_set('America/Santiago');
+echo(date('d-m-Y'));
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,6 +68,9 @@
         </div>
       </nav>
 </header>
+
+
+<img src="https://johan.fuentes.grafana.net/goto/FYwGifz7k?orgId=1">
 
 
 <form>
