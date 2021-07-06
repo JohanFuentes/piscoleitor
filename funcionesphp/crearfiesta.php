@@ -48,10 +48,11 @@ $insert = $relacion->insertOne([
         'piscopor'=> 50,
         'cocapor'=> 50,
         'limitev' => null,
-        'vasosconsumidos'=> 0
+	'vasosconsumidos'=> 0,
+	'nombrefiesta' => $_POST["nombre"]
 ]);
 
-$_SESSION["relacion"] = Array("id"=>$insert->getInsertedId(),"idfiesta"=>$insertOneresult->getInsertedId() ,"correopersona"=> $_SESSION["user"]["correo"], "piscopor" => 50, "cocapor" => 50, "limitev" => null, "vasosconsumidos" => 0);
+$_SESSION["relacion"] = Array("id"=>$insert->getInsertedId(),"idfiesta"=>$insertOneresult->getInsertedId() ,"correopersona"=> $_SESSION["user"]["correo"], "piscopor" => 50, "cocapor" => 50, "limitev" => null, "vasosconsumidos" => 0, 'nombrefiesta' => $_POST["nombre"]);
 
 header("Location:../fiestas/crearFiesta/homefiesta.php");
 

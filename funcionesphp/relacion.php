@@ -6,7 +6,7 @@ require '../vendor/autoload.php';
 
 $bulk = new MongoDB\Driver\BulkWrite;
 
-if(isset($_POST["limitev"])){
+if(isset($_POST["limitev"]) && $_POST["limitev"]!=""){
 
 $bulk->update(
     ['_id' => new MongoDB\BSON\ObjectID($_SESSION["relacion"]["id"])],

@@ -81,14 +81,15 @@ $_SESSION["fiesta"] = Array("id"=>$id ,"nombre"=> $nombre, "limitep" => $limitep
   $docs2 = $manager->executeQuery('piscoleitor.relacion', $query2);
 
   foreach ($docs2 as $doc) {
-	  $id = $doc->_id;
+	  $id2 = $doc->_id;
 	  $idfiesta = $doc->idfiesta;
 	  $correopersona = $doc->correopersona;
 	  $piscopor = $doc->piscopor;
 	  $cocapor = $doc->cocapor;
 	  $limitev = $doc->limitev;
 	  $vasosconsumidos = $doc->vasosconsumidos;
-          $login2 = true;
+	  $login2 = true;
+	  $nombrefiesta = $nombre;
   //or you can: echo "$doc->item  $row->qty  $row->status<br />";
   }
 
@@ -96,23 +97,37 @@ $_SESSION["fiesta"] = Array("id"=>$id ,"nombre"=> $nombre, "limitep" => $limitep
 
 if($login2==false){
 
-	$relacion = $client->piscoleitor->relacion;
 
-	$insert = $relacion->insertOne([
-        'idfiesta'=> $insertOneresult->getInsertedId(),
+$bulk = new MongoDB\Driver\BulkWrite;
+
+$document1 = [
+        'idfiesta'=> new MongoDB\BSON\ObjectID($_POST["id"]),
         'correopersona' => $_SESSION["user"]["correo"],
         'piscopor'=> 50,
         'cocapor'=> 50,
         'limitev' => null,
-        'vasosconsumidos'=> 0
-]);
+	'vasosconsumidos'=> 0,
+	'nombrefiesta' => $nombre
+];
+
+$_id1 = $bulk->insert($document1);
+
+var_dump($_id1);
+
+$manager2 = new MongoDB\Driver\Manager('mongodb://localhost:27017');
+$result = $manager2->executeBulkWrite('piscoleitor.relacion', $bulk);
+
+echo("id: ".$_id1);
+
+	$_SESSION["relacion"] = Array("id"=>$_id1,"idfiesta"=>new MongoDB\BSON\ObjectID($_POST["id"]) ,"correopersona"=> $_SESSION["user"]["correo"], "piscopor" => 50, "cocapor" => 50, "limitev" => null, "vasosconsumidos" => 0, "nombrefiesta" => $nombrefiesta);
 
 
-	$_SESSION["relacion"] = Array("id"=>$insert->getInsertedId(),"idfiesta"=>$insertOneresult->getInsertedId() ,"correopersona"=> $_SESSION["user"]["correo"], "piscopor" => 50, "cocapor" => 50, "limitev" => null, "vasosconsumidos" => 0);
+header("Location: ../fiestas/ingresarFiesta/homefiesta.php");
+
 
 }else{
 
-$_SESSION["relacion"] = Array("id"=>$id,"idfiesta"=>$idfiesta,"correopersona"=>$correopersona , "piscopor" => $piscopor, "cocapor" => $cocapor, "limitev" => $limitev, "vasosconsumidos" => $vasosconsumidos);
+$_SESSION["relacion"] = Array("id"=>$id2,"idfiesta"=>$idfiesta,"correopersona"=>$correopersona , "piscopor" => $piscopor, "cocapor" => $cocapor, "limitev" => $limitev, "vasosconsumidos" => $vasosconsumidos);
 
 }
 

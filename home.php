@@ -1,6 +1,21 @@
 <?php
-
 session_start();
+
+require 'vendor/autoload.php';
+use MongoDB\Client;
+
+$client = new Client('mongodb://localhost:27017');
+$relacion = $client->piscoleitor->relacion;
+$rel = $relacion->find(array(correopersona => $_SESSION["user"]["correo"]));
+
+$fiestas = array();
+$vasos = array();
+
+foreach($rel as $r){
+
+        array_push($fiestas,$r->nombrefiesta);
+        array_push($vasos,$r->vasosconsumidos);
+}
 
 if(isset($_SESSION["user"]) && isset($_SESSION["fiesta"])==false){
 
@@ -16,6 +31,7 @@ if(isset($_SESSION["user"]) && isset($_SESSION["fiesta"])==false){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.js"></script>
 </head>
 <body>
 <header>
@@ -69,6 +85,33 @@ if(isset($_SESSION["user"]) && isset($_SESSION["fiesta"])==false){
       </nav>
 </header>    
 
+<center><h1 style="margin-top:5%;">Bienvenido <?php echo($_SESSION["user"]["nombre"]);?>, en esta pagina de inicio puedes ver las estadisticas de tus fiestas</h1></center>
+
+
+<center><h3 style="margin-top:5%;">Estadisticas</h3></center>
+
+
+<center><div style="margin-top:5%; margin-bottom:5%; margin-left:15%; margin-right:15%;">
+
+
+<canvas id="myChart"></canvas>
+<script src="chart.js"></script>
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    type: 'bar',
+    data:{
+        datasets: [{
+                data: <?php echo json_encode($vasos); ?>,
+                backgroundColor: ['#42a5f5', 'red', 'green','blue','violet'],
+                label: 'Consumo mensual (Vasos vs Fiesta)'}],
+                labels: <?php echo json_encode($fiestas); ?>},
+    options: {responsive: true}
+});
+</script>
+
+
+<!--
 <div id="div_home">
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
@@ -81,6 +124,7 @@ if(isset($_SESSION["user"]) && isset($_SESSION["fiesta"])==false){
       </div>
     </div>
 </div>
+-->
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>

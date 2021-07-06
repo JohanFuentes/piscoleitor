@@ -2,7 +2,49 @@
 
 session_start();
 
+require '../vendor/autoload.php';
+use MongoDB\Client;
+
+$client = new Client('mongodb://localhost:27017');
+$relacion = $client->piscoleitor->relacion;
+$rel = $relacion->find(array(correopersona => $_SESSION["user"]["correo"]));
+
+$fiestas = array();
+$vasos = array();
+
+foreach($rel as $r){
+
+        array_push($fiestas,$r->nombrefiesta);
+        array_push($vasos,$r->vasosconsumidos);
+}
+
+
+foreach($vasos as $v){
+
+	 print_r($v);
+
+}
+
+foreach($fiestas as $f){
+
+        echo($f["nombrefiesta"].",");
+}
+
+
+
 if(isset($_SESSION["user"])){
+ 
+/*
+$fiestas = array();
+$vasos = array();
+ */
+/*
+foreach($fst as $f){
+
+	array_push($fiestas,$f->nombrefiesta);
+	array_push($vasos,$f->vasosconsumidos);
+}
+ */
 
 ?>
 
@@ -84,10 +126,10 @@ var chart = new Chart(ctx, {
     type: 'bar',
     data:{
 	datasets: [{
-		data: [20,18,10, 8, 14],
+		data: <?php echo json_encode($vasos); ?>,
 		backgroundColor: ['#42a5f5', 'red', 'green','blue','violet'],
-		label: 'Consumo mensual (Vasos vs Mes)'}],
-		labels: ['Enero','Febrero','Marzo','Abril','Mayo']},
+		label: 'Consumo mensual (Vasos vs Fiesta)'}],
+		labels: <?php echo json_encode($fiestas); ?>},
     options: {responsive: true}
 });
 </script>
